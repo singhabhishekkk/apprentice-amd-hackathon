@@ -96,6 +96,18 @@ curl -s localhost:8900/report   # local share, fallbacks, tokens: the honest tal
 **Rollback demo:** restart with `-e LOCAL_ENABLED=false` and every request goes to
 Fireworks. That is the whole rollback story: one env var.
 
+**No AMD pod handy?** The router runs everywhere on its own: set
+`LOCAL_ENABLED=false` and it serves 100% from Fireworks while `/report` shows the
+rollback state honestly. Only a Fireworks API key is needed:
+
+```bash
+docker run -p 8900:8900 -e LOCAL_ENABLED=false \
+  -e FIREWORKS_API_KEY=... \
+  -e FIREWORKS_MODEL=accounts/fireworks/models/<allowlisted-model> \
+  apprentice-router
+curl -s localhost:8900/health   # {"status":"ok","local_enabled":false}
+```
+
 ## Why the gate matters (the product thesis)
 
 A cheap model that silently degrades quality is a loss dressed as a saving. The router's
