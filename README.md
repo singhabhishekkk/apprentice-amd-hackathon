@@ -1,8 +1,23 @@
-# Apprentice — AMD-hosted Gemma, eval-gated takeover
+<div align="center">
+
+<img src="assets/logo.svg" width="96" alt="Apprentice logo">
+
+# Apprentice
+
+**The apprentice watches the expensive model work. Then takes over.**
+
+[![website](https://img.shields.io/badge/runapprentice.com-visit-EDE6D6)](https://runapprentice.com)
+[![license](https://img.shields.io/badge/license-MIT-green)](LICENSE)
+[![built on](https://img.shields.io/badge/built%20on-AMD%20MI300X%20%C2%B7%20ROCm-ED1C24)](https://www.amd.com/en/products/accelerators/instinct/mi300/mi300x.html)
+[![powered by](https://img.shields.io/badge/powered%20by-Gemma%204%20E4B-4285F4)](https://ai.google.dev/gemma)
+[![fallback](https://img.shields.io/badge/fallback-Fireworks%20AI-8B5CF6)](https://fireworks.ai)
+[![every number](https://img.shields.io/badge/every%20number-measured-orange)](https://github.com/singhabhishekkk/apprentice-benchmark)
 
 **AMD Developer Hackathon: ACT II · Track 3 (Unicorn Track)**
 
-Built on **AMD MI300X (ROCm)** · Powered by **Gemma 4 E4B** · **Fireworks AI** as the honest fallback
+*Demo film: link added at submission (the 4K cut with the AMD + Gemma beat).*
+
+</div>
 
 [Apprentice](https://runapprentice.com) turns a repeatable frontier-LLM task into a small
 model you own: capture real input/output pairs, verify them to gold, optimize the prompt,
@@ -91,10 +106,13 @@ product applies the same rule with human-verified gold rows and a canary rollout
 
 ## The wider Apprentice surface
 
-- Product: [runapprentice.com](https://runapprentice.com) · [docs](https://docs.runapprentice.com)
-- Reproducible benchmark (3 tasks, every number rerunnable): [apprentice-benchmark](https://github.com/singhabhishekkk/apprentice-benchmark)
-- Agent skill (Claude Code / Codex / Copilot CLI): [apprentice-skill](https://github.com/singhabhishekkk/apprentice-skill)
-- SDK: `pip install runapprentice`
+| Piece | Where | What |
+|---|---|---|
+| Product | [runapprentice.com](https://runapprentice.com) | the full loop: capture, verify, optimize, train, eval gate, canary, rollback |
+| Docs | [docs.runapprentice.com](https://docs.runapprentice.com) | quickstart, deploy guides (Mac/MLX, Kubernetes/vLLM), SDK reference |
+| Benchmark | [apprentice-benchmark](https://github.com/singhabhishekkk/apprentice-benchmark) | 3 public tasks, every number rerunnable (Apache-2.0) |
+| Agent skill | [apprentice-skill](https://github.com/singhabhishekkk/apprentice-skill) | Claude Code plugin, Codex plugin, Copilot CLI skill (MIT) |
+| SDK | [runapprentice on PyPI](https://pypi.org/project/runapprentice/) | `pip install runapprentice` · free local optimize and MLX train, no account needed |
 
 ## License
 
