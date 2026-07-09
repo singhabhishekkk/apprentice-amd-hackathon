@@ -1,0 +1,17 @@
+# Training container for the AMD pod. Base image is AMD's ROCm PyTorch build;
+# pin the digest after the first pull on AMD Developer Cloud (docs show
+# `latest`, a submission should not float).
+FROM rocm/pytorch:latest
+
+WORKDIR /work
+COPY requirements-train.txt .
+RUN pip install --no-cache-dir -r requirements-train.txt
+
+COPY scripts/ scripts/
+COPY data/ data/
+
+# Usage on the pod (GPU access flags per AMD docs):
+#   docker run --device=/dev/kfd --device=/dev/dri --group-add video \
+#     -v $PWD/out:/work/out apprentice-train \
+#     python scripts/train_gemma_rocm.py --data data/golden.csv --output-dir out/adapter
+CMD ["python", "scripts/train_gemma_rocm.py", "--data", "data/golden.csv", "--output-dir", "out/adapter"]
