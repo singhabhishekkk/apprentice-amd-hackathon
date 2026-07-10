@@ -88,7 +88,8 @@ def main() -> None:
     args = parser.parse_args()
 
     assert torch.cuda.is_available(), "No GPU visible. Under ROCm this must be true on an MI300X pod."
-    device_name = torch.cuda.get_device_name(0)
+    # Some ROCm builds return an empty device name; rocm-smi is the real proof.
+    device_name = torch.cuda.get_device_name(0) or "AMD GPU (name unavailable in this ROCm build)"
     print(f"device: {device_name}")
 
     trainset, devset = load_rows(args.data)
@@ -108,7 +109,11 @@ def main() -> None:
     lora = LoraConfig(
         r=16,
         lora_alpha=16,
-        target_modules=["q_proj", "k_proj", "v_proj", "o_proj", "gate_proj", "up_proj", "down_proj"],
+        # Regex, not a name list: Gemma 4 is multimodal and its vision/audio
+        # towers wrap linears in Gemma4ClippableLinear, which PEFT cannot
+        # adapt. Scoping to the language model adapts only real nn.Linear
+        # projections -- this is a text-only fine-tune anyway.
+        target_modules=r".*language_model.*\.(q_proj|k_proj|v_proj|o_proj|gate_proj|up_proj|down_proj)$",
         task_type="CAUSAL_LM",
     )
     model = get_peft_model(model, lora)
@@ -133,8 +138,10 @@ def main() -> None:
             bf16=True,
             output_dir=str(args.output_dir / "checkpoints"),
             report_to="none",
-            # Short JSON rows waste GPU on padding without packing.
-            packing=True,
+            # TRL refuses packing for vision-language models, and Gemma 4
+            # counts as one even in this text-only run. Padding waste is
+            # acceptable at 140 rows.
+            packing=False,
         ),
     )
     t0 = time.time()
