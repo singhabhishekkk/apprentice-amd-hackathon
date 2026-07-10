@@ -53,7 +53,10 @@ field-level F1 as the public benchmark.
 The run itself is in the repo: [`notebooks/mi300x-run.ipynb`](notebooks/mi300x-run.ipynb)
 is the actual pod notebook with outputs unedited, and
 [`notebooks/run_report.json`](notebooks/run_report.json) is the machine-readable report
-it printed.
+it printed. The trained adapter is public:
+[apprentice-gemma4-e4b-lora-cuad-mi300x](https://huggingface.co/singhabhishekkk/apprentice-gemma4-e4b-lora-cuad-mi300x)
+(Built with Gemma, Apache-2.0) -- serve it with the vLLM command in step 3 below, no
+retraining needed.
 
 For scale: the best teacher result published for this task is gpt-5.4-mini at 34.00
 baseline / 36.33 GEPA-optimized ([benchmark README](https://github.com/singhabhishekkk/apprentice-benchmark/tree/main/tasks/contract-clause-extraction)).
