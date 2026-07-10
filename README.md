@@ -15,7 +15,7 @@
 
 **AMD Developer Hackathon: ACT II · Track 3 (Unicorn Track)**
 
-*Demo film: link added at submission (the 4K cut with the AMD + Gemma beat).*
+**[▶ Watch the demo film](https://youtu.be/OYurW2UXqnA)** — the 4K cut with the AMD + Gemma beat.
 
 </div>
 
