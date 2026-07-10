@@ -1,0 +1,10 @@
+{
+  "device": "AMD GPU (name unavailable in this ROCm build)",
+  "model": "google/gemma-4-E4B-it",
+  "seed": 42,
+  "raw_score": 36.33,
+  "baseline_eval_seconds": 556.2,
+  "train_seconds": 505.8,
+  "finetuned_score": 61.67,
+  "final_eval_seconds": 1079.8
+}

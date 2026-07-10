@@ -50,6 +50,11 @@ field-level F1 as the public benchmark.
 | Train wall time on the AMD GPU | 505.8 s (~8.4 GPU-minutes per adapter) |
 | Baseline / final eval wall time | 556.2 s / 1079.8 s |
 
+The run itself is in the repo: [`notebooks/mi300x-run.ipynb`](notebooks/mi300x-run.ipynb)
+is the actual pod notebook with outputs unedited, and
+[`notebooks/run_report.json`](notebooks/run_report.json) is the machine-readable report
+it printed.
+
 For scale: the best teacher result published for this task is gpt-5.4-mini at 34.00
 baseline / 36.33 GEPA-optimized ([benchmark README](https://github.com/singhabhishekkk/apprentice-benchmark/tree/main/tasks/contract-clause-extraction)).
 The AMD-trained Gemma E4B fine-tune scores +25.3 over the optimized teacher on the same
