@@ -39,16 +39,24 @@ fallback counted against the savings.
 
 ## Results
 
-Filled from the real MI300X run's `run_report.json` before submission. This repo never
-carries a number that was not measured. The published CUDA/Colab numbers for the same
-loop live in [apprentice-benchmark](https://github.com/singhabhishekkk/apprentice-benchmark).
+Measured on the AMD pod, 2026-07-10 (`run_report.json`, printed by the run -- this repo
+never carries a number that was not measured). Held-out: the same 60 CUAD rows and
+field-level F1 as the public benchmark.
 
 | Measurement | Value |
 |---|---|
-| Gemma 4 E4B raw (no fine-tune), held-out F1 | *pending MI300X run* |
-| Gemma 4 E4B fine-tuned, held-out F1 | *pending MI300X run* |
-| Train wall time on MI300X | *pending* |
-| GPU-minutes per adapter | *pending* |
+| Gemma 4 E4B raw (no fine-tune), held-out F1 | 36.33 |
+| Gemma 4 E4B fine-tuned (bf16 LoRA, 3 epochs), held-out F1 | **61.67** |
+| Train wall time on the AMD GPU | 505.8 s (~8.4 GPU-minutes per adapter) |
+| Baseline / final eval wall time | 556.2 s / 1079.8 s |
+
+For scale: the best teacher result published for this task is gpt-5.4-mini at 34.00
+baseline / 36.33 GEPA-optimized ([benchmark README](https://github.com/singhabhishekkk/apprentice-benchmark/tree/main/tasks/contract-clause-extraction)).
+The AMD-trained Gemma E4B fine-tune scores +25.3 over the optimized teacher on the same
+held-out rows. Honest notes: this run is bf16 TRL + PEFT (not 4-bit), and
+`torch.cuda.get_device_name` returns an empty string under this ROCm build, so the
+report says "AMD GPU" while `rocm-smi` (device 0x744b, GPU% pinned at 100 during
+training) is the hardware proof.
 
 ## Reproduce
 
